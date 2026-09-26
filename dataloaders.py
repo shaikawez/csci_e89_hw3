@@ -13,12 +13,9 @@ print(f"Train batches: {len(train_loader)}")
 print(f"Validation batches: {len(val_loader)}")
 print(f"Test batches: {len(test_loader)}")
 
-# Grab the first batch from the training loader and inspect its first image
-images, labels = next(iter(train_loader))
-first_image = images[0]
-first_label = labels[0]
+# Inspect the first image in the training set
+first_image, first_label = train_dataset[0]
 
-print(f"Batch images shape: {images.shape}")  # expected [32, 1, 28, 28]
 print(f"First image shape: {first_image.shape}")  # expected [1, 28, 28]
 print(f"First image dtype: {first_image.dtype}")  # expected torch.float32
-print(f"First image label: {first_label.item()}")
+print(f"First image label: {first_label}")
