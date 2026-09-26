@@ -9,12 +9,14 @@ else:
     print("CUDA is not available. Using CPU.")
 
 from torch.utils.data import random_split
-from torchvision import datasets, transforms
+from torchvision import datasets
+from torchvision.transforms import v2
 
-# Convert images to tensors and normalize with FashionMNIST mean/std
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.2860,), (0.3530,)),
+# Convert images to float32 tensors scaled to [0, 1], then normalize with FashionMNIST mean/std
+transform = v2.Compose([
+    v2.ToImage(),
+    v2.ToDtype(torch.float32, scale=True),
+    v2.Normalize((0.2860,), (0.3530,)),
 ])
 
 # Download FashionMNIST (60,000 training images, 10,000 test images)
